@@ -1,14 +1,15 @@
 package com.example.model;
 
+import com.example.aspect.Loggable;
+
 /**
  * Created by solina on 03.05.2017.
  */
 public class Circle {
 
-    int count = 10;
-
     private String name;
 
+    @Loggable
     public String getName() {
         return name;
     }

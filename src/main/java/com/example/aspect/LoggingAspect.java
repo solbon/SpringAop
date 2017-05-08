@@ -2,6 +2,7 @@ package com.example.aspect;
 
 import com.example.model.Circle;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 
 /**
@@ -30,10 +31,24 @@ public class LoggingAspect {
         System.out.println("String argument passed. Value is '" + name + "'");
     }
 
-//    @Pointcut("execution(* get*(..))")
-//    public void allGetters() {}
-//
-//    @Pointcut("within(com.example.model.Circle)")
-//    public void allCircleMethods() {}
+    @Around("@annotation(com.example.aspect.Loggable)")
+    public Object myAroundAdvice(ProceedingJoinPoint joinPoint) {
+        Object result = null;
+        System.out.println("Before advice");
+        try {
+            result = joinPoint.proceed();
+            System.out.println("After returning");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        System.out.println("After advice");
+        return result;
+    }
+
+    @Pointcut("execution(* get*(..))")
+    public void allGetters() {}
+
+    @Pointcut("within(com.example.model.Circle)")
+    public void allCircleMethods() {}
 
 }
