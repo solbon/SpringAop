@@ -10,7 +10,11 @@ public class Circle {
     private String name;
 
     public String getName() {
-//        System.out.println("in Circle getName");
+        return name;
+    }
+
+    public String setNameAndReturn(String name) {
+        this.name = name;
         return name;
     }
 
