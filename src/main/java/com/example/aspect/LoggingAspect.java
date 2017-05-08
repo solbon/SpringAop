@@ -1,5 +1,7 @@
 package com.example.aspect;
 
+import com.example.model.Circle;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -11,14 +13,19 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect
 public class LoggingAspect {
 
-    @Before("allGetters() && allCircleMethods()")
-    public void loggingAdvice() {
-        System.out.println("Advice run. Get Method called");
+    @Before("allCircleMethods()")
+    public void loggingAdvice(JoinPoint joinPoint) {
+        System.out.println(((Circle) joinPoint.getTarget()));
     }
 
     @Before("allGetters()")
     public void secondAdvice() {
         System.out.println("Second advice executed.");
+    }
+
+    @Before("args(name)")
+    public void stringArgumentMethods(String name) {
+        System.out.println("String argument passed. Value is '" + name + "'");
     }
 
     @Pointcut("execution(* get*(..))")
