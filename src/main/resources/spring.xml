@@ -20,7 +20,11 @@
         <property name="name" value="Triangle name"/>
     </bean>
     <bean id="shapeService" class="com.example.service.ShapeService" autowire="byName" />
-    <bean id="loggingAspect" class="com.example.aspect.LoggingAspect"/>
-    <bean id="foo" class="com.example.model.Foo"/>
-    <context:annotation-config/>
+    <bean name="loggingAspect" class="com.example.aspect.LoggingAspect"/>
+    <aop:config>
+        <aop:aspect id="loggingAspect" ref="loggingAspect">
+            <aop:pointcut id="allGetters" expression="execution(* get*(..))"/>
+            <aop:around pointcut-ref="allGetters" method="myAroundAdvice"/>
+        </aop:aspect>
+    </aop:config>
 </beans>
