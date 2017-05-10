@@ -9,6 +9,10 @@ import org.aspectj.lang.annotation.Pointcut;
  */
 public class LoggingAspect {
 
+    public void loggingAdvice() {
+        System.out.println("Advice run. Getter Method called");
+    }
+
     public Object myAroundAdvice(ProceedingJoinPoint joinPoint) {
         Object result = null;
         System.out.println("Before advice");

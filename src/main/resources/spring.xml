@@ -25,6 +25,7 @@
         <aop:aspect id="loggingAspect" ref="loggingAspect">
             <aop:pointcut id="allGetters" expression="execution(* get*(..))"/>
             <aop:around pointcut-ref="allGetters" method="myAroundAdvice"/>
+            <aop:before pointcut-ref="allGetters" method="loggingAdvice"/>
         </aop:aspect>
     </aop:config>
 </beans>

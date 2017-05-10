@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.model.Circle;
 import com.example.model.Foo;
+import com.example.service.FactoryService;
 import com.example.service.ShapeService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -11,8 +12,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class AopMain {
     public static void main(String[] args) {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
-        ShapeService shapeService = ctx.getBean("shapeService", ShapeService.class);
+//        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+//        ShapeService shapeService = ctx.getBean("shapeService", ShapeService.class);
+        FactoryService factoryService = new FactoryService();
+        ShapeService shapeService = (ShapeService) factoryService.getBean("shapeService");
         shapeService.getCircle();
     }
 }
